@@ -153,9 +153,10 @@ LIST EnqueueOrdered(LIST l, ItemType item, int index) {
     }
     NODE* new_node = createNode(item);
     NODE* old_node = createNode(tmp->next->item);
+    old_node->next = tmp->next->next;
     tmp->next = new_node;
     new_node->next = old_node;
-    return tmp;
+    return l;
 }
 
 /* Toglie il primo elemento della lista (se non e' vuota) */
@@ -175,7 +176,7 @@ LIST DequeueLast(LIST l) {
         return NULL;
     } else {
         LIST tmp = l;
-        int i;
+        int i = 0;
         while (tmp != NULL && i != getLength(l)-2) {
             i++;
             tmp = tmp->next;
